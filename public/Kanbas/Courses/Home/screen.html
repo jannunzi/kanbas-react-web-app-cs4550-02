@@ -1,8 +1,13 @@
-<table border="1" width="100%">
-  <tbody>
-    <tr>
-      <td valign="top">
-        <ul>
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="../../KanbasNavigation/index.css" />
+    <link rel="stylesheet" href="../CourseNavigation/index.css" />
+  </head>
+  <body>
+    <div class="wd-flex-row-container">
+      <div class="bg-color-yellow">
+        <ul class="wd-kanbas-navigator">
           <li>
             <a href="/Kanbas/Account/Profile/screen.html">Account</a>
           </li>
@@ -13,19 +18,22 @@
             <a href="/Kanbas/Courses/Home/screen.html">Courses</a>
           </li>
           <li>
-            <a href="#">Calendar</a>
+            <a href="#">
+              <i class="fa-regular fa-calendar"></i>
+              Calendar</a
+            >
           </li>
         </ul>
-      </td>
-      <td valign="top">
-        <ul>
+      </div>
+      <div class="bg-color-blue">
+        <ul class="wd-course-navigation">
           <li>
             <a href="/Kanbas/Courses/Home/screen.html">Home</a>
           </li>
           <li>
             <a href="/Kanbas/Courses/Modules/screen.html">Modules</a>
           </li>
-          <li>
+          <li class="active">
             <a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a>
           </li>
           <li>
@@ -38,8 +46,8 @@
             <a href="/Kanbas/Courses/Grades/screen.html">Grades</a>
           </li>
         </ul>
-      </td>
-      <td valign="top">
+      </div>
+      <div class="bg-color-red wd-flex-grow-1">
         <ul>
           <li>
             Week 0
@@ -57,8 +65,8 @@
           <li>Week 1</li>
           <li>Week 2</li>
         </ul>
-      </td>
-      <td valign="top">Status</td>
-    </tr>
-  </tbody>
-</table>
+      </div>
+      <div class="bg-color-blue">Status</div>
+    </div>
+  </body>
+</html>
