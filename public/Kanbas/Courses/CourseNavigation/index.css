@@ -1,21 +1,29 @@
 .wd-course-navigation {
-  /* background-color: aqua; */
-  width: 120px;
-  padding: 0px;
   margin-left: 20px;
+  margin-top: 20px;
 }
 
-.wd-course-navigation li {
-  list-style-type: none;
-  margin-bottom: 20px;
-  padding-left: 10px;
+.wd-course-navigation.list-group {
+  border-radius: 0px;
 }
 
-.wd-course-navigation li.active {
-  border-left: 1px black solid;
+.wd-course-navigation .list-group-item {
+  border: none;
+  color: red;
 }
 
-.wd-course-navigation li a {
+.wd-course-navigation .list-group-item a {
   color: red;
   text-decoration: none;
+}
+
+.wd-course-navigation .list-group-item.active a {
+  color: black;
+}
+
+.wd-course-navigation .list-group-item.active {
+  color: black;
+  background-color: white;
+  border: none;
+  border-left: 2px solid black;
 }
