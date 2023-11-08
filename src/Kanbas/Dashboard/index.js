@@ -1,33 +1,54 @@
 import { Link } from "react-router-dom";
-import db from "../Database";
 import "./index.css";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
+import * as client from "../Courses/client";
 
 function Dashboard() {
-  const [courses, setCourses] = useState(db.courses);
+  const [courses, setCourses] = useState([]);
   const [course, setCourse] = useState({
     name: "New Course",
     number: "New Number",
     startDate: "2023-09-10",
     endDate: "2023-12-15",
   });
-  const deleteCourse = (courseId) => {
-    setCourses(courses.filter((course) => course._id !== courseId));
+
+  const init = async () => {
+    const courses = await client.fetchCourses();
+    setCourses(courses);
   };
 
-  const addNewCourse = () => {
-    setCourses([...courses, { ...course, _id: new Date().getTime() }]);
+  useEffect(() => {
+    init();
+  }, []);
+
+  const deleteCourse = async (courseId) => {
+    try {
+      await client.deleteCourse(1234);
+      setCourses(courses.filter((course) => course._id !== courseId));
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const updateCourse = () => {
-    setCourses(
-      courses.map((c) => {
-        if (c._id === course._id) {
-          return course;
-        } else {
-          return c;
-        }
-      })
-    );
+
+  const addNewCourse = async () => {
+    const newCourse = await client.addCourse(course);
+    setCourses([...courses, newCourse]);
+  };
+  const updateCourse = async () => {
+    try {
+      const status = await client.updateCourse(course);
+      setCourses(
+        courses.map((c) => {
+          if (c._id === course._id) {
+            return course;
+          } else {
+            return c;
+          }
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
