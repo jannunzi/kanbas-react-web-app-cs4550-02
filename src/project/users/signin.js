@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import * as client from "./client";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { setCurrentUser } from "./reducer";
+import { useDispatch } from "react-redux";
 
 function SignIn() {
+  const { currentUser } = useSelector((state) => state.user);
   const [error, setError] = useState(null);
-  const [user, setUser] = useState({ username: "", password: "" });
+  const [account, setAccount] = useState({ username: "", password: "" });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const signIn = async () => {
     try {
-      const currentUser = await client.signIn(user);
+      const currentUser = await client.signIn(account);
+      dispatch(setCurrentUser(currentUser));
       navigate("/project/account");
     } catch (error) {
       setError(error);
@@ -17,19 +23,19 @@ function SignIn() {
   };
   return (
     <div>
-      <h1>Sign In</h1>
+      <h1>Sign In {JSON.stringify(currentUser)}</h1>
       {error && <div className="alert alert-danger">{error.message}</div>}
       <input
         type="text"
         className="form-control"
-        value={user.username}
-        onChange={(e) => setUser({ ...user, username: e.target.value })}
+        value={account.username}
+        onChange={(e) => setAccount({ ...account, username: e.target.value })}
       />
       <input
         type="password"
         className="form-control"
-        value={user.password}
-        onChange={(e) => setUser({ ...user, password: e.target.value })}
+        value={account.password}
+        onChange={(e) => setAccount({ ...account, password: e.target.value })}
       />
       <button onClick={signIn} className="btn btn-primary">
         Sign In
